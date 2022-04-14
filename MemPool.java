@@ -1,3 +1,13 @@
+import java.util.*;
+
 public class MemPool {
-	private String[] transactions;
+	private List<String> transactions;
+
+	public MemPool() {
+		transactions = new ArrayList<String>();
+	}
+
+	public void addTransaction(String trans) {
+		
+	}
 }

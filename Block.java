@@ -1,3 +1,7 @@
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Block { 
 	private String hash;
 	private String prev;
@@ -9,13 +13,13 @@ public class Block {
 
 	public Block(String data, String previousHash, long timeStamp) {
         	this.data = data;
-        	this.previousHash = previousHash;
+        	this.prev = previousHash;
         	this.timeStamp = timeStamp;
         	this.hash = calculateBlockHash();
     	}
 
 	public String calculateBlockHash() {
-		String dataToHash = previousHash 
+		String dataToHash = prev
       		+ Long.toString(timeStamp) 
       		+ Integer.toString(nonce) 
       		+ data;
@@ -25,9 +29,9 @@ public class Block {
     
 		try {
         		digest = MessageDigest.getInstance("SHA-256");
-        		bytes = digest.digest(dataToHash.getBytes(UTF_8));
+        		bytes = digest.digest(dataToHash.getBytes("UTF_8"));
     		} catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-        		logger.log(Level.SEVERE, ex.getMessage());
+        		System.out.println(ex.getMessage());
     		}
     		
 		StringBuffer buffer = new StringBuffer();
@@ -43,7 +47,7 @@ public class Block {
 	}
 
 	public String getPrev() {
-		return previousHash;
+		return prev;
 	}
 	
 	public String getData() {

@@ -1,16 +1,25 @@
+import java.util.*;
+
 public class Chain {
-	static List<Block> chain;
-	int prefix = 8;
-	String prefixString = "amlcjdsh"
+	List<Block> chain;
+	int prefix;
+	String prefixString = "amlcjdsh";
 
-	static Chain blockChain = new Chain();
+	static Chain blockChain = new Chain(8, "amdshjke");
 
-	private Chain() {
-		chain = new ArrayList<>();
+	private Chain(int prefix, String prefixString) {
+		this.chain = new ArrayList<Block>();
+		this.prefix = prefix;
+		this.prefixString = prefixString;
 	}
 
-	public addBlock(Block bl_) {
-		assertTrue(bl_.getHash().substring(0, prefix).equals(prefixString);
-		blockChain.chain.add(bl_);
+	public void addBlock(Block bl_) {
+		if (bl_.getHash().substring(0, prefix).equals(prefixString)) {
+			blockChain.chain.add(bl_);
+		}
+
+		else {
+			System.out.println("[ERR] Block has illegal hash value.");
+		}
 	}
 }
