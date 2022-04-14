@@ -15,8 +15,12 @@ public class MemPool {
 
 		byte[] verifyHash = TransactionHasher.hashTransaction(original);
 
-		if (verifyHash.equals(hash)) {
+		if (Arrays.equals(hash, verifyHash)) {
 			transactions.add(original);
+		}
+
+		else {
+			System.out.println("[WARN] Transaction labelled " + original + " does not match.");
 		}
 	}
 

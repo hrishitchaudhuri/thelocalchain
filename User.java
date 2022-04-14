@@ -36,8 +36,9 @@ public class User {
 	}
 
 	public void setTransaction(String transaction) throws Exception {
-		byte[] encryptedTransaction = TransactionEncrypter.encryptTransaction(transaction, userPrivateKey);
-		byte[] hashedTransaction = TransactionHasher.hashTransaction(transaction);
+		String transactionString = userName + ">>" + transaction;
+		byte[] encryptedTransaction = TransactionEncrypter.encryptTransaction(transactionString, userPrivateKey);
+		byte[] hashedTransaction = TransactionHasher.hashTransaction(transactionString);
 
 		publicMemPool.addTransaction(encryptedTransaction, hashedTransaction, userPublicKey);
 	}
