@@ -1,5 +1,4 @@
 import java.security.*;
-import javax.crypto.Cipher;
 
 public class User {
 	private String userName;
@@ -8,7 +7,7 @@ public class User {
 
 	private MemPool publicMemPool;
 
-	public User(String userName, MemPool mp) {
+	public User(String userName, MemPool mp) throws Exception {
 		this.userName = userName;
 		this.publicMemPool = mp;
 
@@ -36,8 +35,10 @@ public class User {
 		this.publicMemPool = mp;
 	}
 
-	public void setTransaction(String transaction) {
-		Cipher encryptCipher = Cipher.getInstance("RSA");
-		encryptCipher.init(Cipher.ENCRYPT_MODE, userPublicKey);
+	public void setTransaction(String transaction) throws Exception {
+		byte[] encryptedTransaction = TransactionEncrypter.encryptTransaction(transaction, userPrivateKey);
+		byte[] hashedTransaction = TransactionHasher.hashTransaction(transaction);
+
+		publicMemPool.addTransaction(encryptedTransaction, hashedTransaction, userPublicKey);
 	}
 }

@@ -1,6 +1,4 @@
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class Block { 
 	private String hash;
@@ -11,33 +9,29 @@ public class Block {
 
 	private int nonce;
 
-	public Block(String data, String previousHash, long timeStamp) {
-        	this.data = data;
-        	this.prev = previousHash;
-        	this.timeStamp = timeStamp;
-        	this.hash = calculateBlockHash();
-    	}
+	public Block(String data, String previousHash, long timeStamp) throws Exception {
+        this.data = data;
+        this.prev = previousHash;
+        this.timeStamp = timeStamp;
+        this.hash = calculateBlockHash();
+    }
 
-	public String calculateBlockHash() {
-		String dataToHash = prev
+	public String calculateBlockHash() throws Exception {
+		String hashableData = prev
       		+ Long.toString(timeStamp) 
       		+ Integer.toString(nonce) 
       		+ data;
     
 		MessageDigest digest = null;
-    		byte[] bytes = null;
-    
-		try {
-        		digest = MessageDigest.getInstance("SHA-256");
-        		bytes = digest.digest(dataToHash.getBytes("UTF_8"));
-    		} catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-        		System.out.println(ex.getMessage());
-    		}
+    	byte[] bytes = null;
+
+        digest = MessageDigest.getInstance("SHA-256");
+        bytes = digest.digest(hashableData.getBytes("UTF_8"));
     		
 		StringBuffer buffer = new StringBuffer();
-    		for (byte b : bytes) {
-        		buffer.append(String.format("%02x", b));
-    		}
+    	for (byte b : bytes) {
+        	buffer.append(String.format("%02x", b));
+    	}
     
 		return buffer.toString();
 	}
