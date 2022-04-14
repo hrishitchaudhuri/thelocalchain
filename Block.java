@@ -1,4 +1,5 @@
 import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
 
 public class Block { 
 	private String hash;
@@ -9,9 +10,8 @@ public class Block {
 
 	private int nonce;
 
-	public Block(String data, String previousHash, long timeStamp) throws Exception {
+	public Block(String data, long timeStamp) throws Exception {
         this.data = data;
-        this.prev = previousHash;
         this.timeStamp = timeStamp;
         this.hash = calculateBlockHash();
     }
@@ -26,7 +26,7 @@ public class Block {
     	byte[] bytes = null;
 
         digest = MessageDigest.getInstance("SHA-256");
-        bytes = digest.digest(hashableData.getBytes("UTF_8"));
+        bytes = digest.digest(hashableData.getBytes(StandardCharsets.UTF_8));
     		
 		StringBuffer buffer = new StringBuffer();
     	for (byte b : bytes) {
@@ -36,12 +36,24 @@ public class Block {
 		return buffer.toString();
 	}
 
+	public void display() {
+		System.out.println(data + "@" + Long.toString(timeStamp) + ":" + hash);
+	}
+
 	public String getHash() {
 		return hash;
 	}
 
+	public void resetHash() throws Exception {
+		this.hash = calculateBlockHash();
+	}
+
 	public String getPrev() {
 		return prev;
+	}
+
+	public void setPrev(String prev) {
+		this.prev = prev;
 	}
 	
 	public String getData() {
@@ -54,5 +66,9 @@ public class Block {
 
 	public int getNonce() {
 		return nonce;
+	}
+
+	public void setNonce(int nonce) {
+		this.nonce = nonce;
 	}
 }

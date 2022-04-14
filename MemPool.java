@@ -2,9 +2,11 @@ import java.util.*;
 import java.security.*;
 
 public class MemPool {
+	private int id;
 	private List<String> transactions;
 
-	public MemPool() {
+	public MemPool(int id) {
+		this.id = id;
 		transactions = new ArrayList<String>();
 	}
 
@@ -16,5 +18,13 @@ public class MemPool {
 		if (verifyHash.equals(hash)) {
 			transactions.add(original);
 		}
+	}
+
+	public String getTransactions() {
+		return id + ":" + String.join(",", transactions);
+	}
+
+	public void clearTransactions() {
+		transactions.clear();
 	}
 }

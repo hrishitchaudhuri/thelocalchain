@@ -1,4 +1,5 @@
 import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
 
 public class TransactionHasher {
     static public byte[] hashTransaction(String transaction) throws Exception {
@@ -6,7 +7,7 @@ public class TransactionHasher {
     	byte[] bytes = null;
 
         digest = MessageDigest.getInstance("SHA-256");
-        bytes = digest.digest(transaction.getBytes("UTF_8"));
+        bytes = digest.digest(transaction.getBytes(StandardCharsets.UTF_8));
 
         return bytes;
     }

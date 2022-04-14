@@ -1,14 +1,18 @@
-public class Miner {
-	static int count = 0;
-	
-	public String mineBlock(int prefix) {
-		String prefixString = new String(new char[prefix]).replace('\0', '0');
-    		
-		while (!hash.substring(0, prefix).equals(prefixString)) {
-        		nonce++;
-        		hash = calculateBlockHash();
-    		}
+import java.time.ZonedDateTime;
 
-    		return hash;
+public class Miner {
+	public Block mineBlock(String prefixString, MemPool pool) throws Exception {
+    	String transactionString = pool.getTransactions();
+
+		Block bl = new Block(transactionString, ZonedDateTime.now().toInstant().toEpochMilli());
+
+		while (!bl.getHash().substring(0, prefixString.length()).equals(prefixString)) {
+        	bl.setNonce(bl.getNonce() + 1);
+        	bl.resetHash();
+    	}
+
+		pool.clearTransactions();
+
+    	return bl;
 	}
 }
