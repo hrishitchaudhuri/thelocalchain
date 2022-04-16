@@ -11,7 +11,7 @@ public class MemPool {
 	}
 
 	public void addTransaction(byte[] trans, byte[] hash, PublicKey userPublicKey) throws Exception {
-		String original = TransactionDecrypter.decryptTransaction(trans, userPublicKey);
+		String original = TransactionDecrypter.decryptTransaction(trans, User.getUserPublicKey());
 
 		byte[] verifyHash = TransactionHasher.hashTransaction(original);
 

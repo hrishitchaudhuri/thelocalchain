@@ -19,6 +19,10 @@ public class User {
 		this.userPrivateKey = pair.getPrivate();
 	}
 
+	public String getUserPrivateKey() {
+		return this.userPrivateKey;
+	}
+
 	public String getUserName() {
 		return this.userName;
 	}
@@ -35,11 +39,11 @@ public class User {
 		this.publicMemPool = mp;
 	}
 
-	public void setTransaction(String transaction, String transacName) throws Exception {
-		String transactionString = transacName + "~" + userName + ">>" + transaction;
-		byte[] encryptedTransaction = TransactionEncrypter.encryptTransaction(transactionString, userPrivateKey);
-		byte[] hashedTransaction = TransactionHasher.hashTransaction(transactionString);
+	// public void setTransaction(String transaction, String transacName) throws Exception {
+	// 	String transactionString = transacName + "~" + userName + ">>" + transaction;
+	// 	byte[] encryptedTransaction = TransactionEncrypter.encryptTransaction(transactionString, userPrivateKey);
+	// 	byte[] hashedTransaction = TransactionHasher.hashTransaction(transactionString);
 
-		publicMemPool.addTransaction(encryptedTransaction, hashedTransaction, userPublicKey);
-	}
+	// 	publicMemPool.addTransaction(encryptedTransaction, hashedTransaction, userPublicKey);
+	// }
 }

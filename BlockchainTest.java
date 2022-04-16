@@ -29,9 +29,11 @@ public class BlockchainTest {
         for (int i = existing_users; i < total_users; i++) {
             String transacName = sc.nextLine();
             String transac= sc.nextLine();
-            usersList.get(i).setTransaction(transac, transacName);
+            String usern= usersList.get(i).getUserName();
+            TransactionHelper.setTransaction(transac, transacName, usern);
+            // usersList.get(i).setTransaction(transac, transacName);
 
-            System.out.println("The anee is -" +usersList.get(i).getUserName());
+            //System.out.println("The username is -" +usersList.get(i).getUserName());
           }
 
         Miner man = new Miner();
