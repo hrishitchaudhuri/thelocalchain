@@ -13,11 +13,27 @@ public class Chain {
 		this.prefixString = prefixString;
 	}
 
+	public void verifychain(){
+		// Chain vchain= getChain();
+
+	 	for (int i = blockChain.chain.size() - 1; i > 0; i--) 
+		{
+			// System.out.println("ok ok hopefully ");
+	 		Block b = blockChain.chain.get(i);
+			Block prevblock = blockChain.chain.get(i-1);
+	 		if (prevblock.getHash().equals(b.getPrev())) {
+	 			System.out.println("ok for "+ i);
+	 		} else {
+	 			throw new RuntimeException("Chain Invalid");
+	 		}
+		}
+	}
+
 	public void addBlock(Block bl_) {
 		if (bl_.getHash().substring(0, prefix).equals(prefixString)) {
 			if (blockChain.chain.size() >= 1) {
-				
-				//verifychain()
+				// System.out.println("ok adding more ");
+				verifychain();
 
 				String previous = blockChain.chain.get(blockChain.chain.size() - 1).getHash();
 				bl_.setPrev(previous);
@@ -26,6 +42,8 @@ public class Chain {
 			else {
 				String previous = "0000";
 				bl_.setPrev(previous);
+				// System.out.println("ok genesis ");
+	
 			}
 
 			blockChain.chain.add(bl_);
@@ -57,4 +75,5 @@ public class Chain {
 			block.display();
 		}
 	}
+	
 }

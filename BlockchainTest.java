@@ -4,9 +4,11 @@ public class BlockchainTest {
     public static void main(String[] args) throws Exception {
         Chain bc = Chain.getChain(2, "00");
         ArrayList<User> usersList = new ArrayList<>();
-
+        int flag=1;
         MemPool mp = new MemPool(1);
-
+        
+        while (flag!=0)
+        {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the number of users:");
         int no_of_users = sc.nextInt();
@@ -26,7 +28,7 @@ public class BlockchainTest {
             String transac= sc.nextLine();
             usersList.get(i).setTransaction(transac, transacName);
 
-            System.out.println(transacName);
+            // System.out.println(transacName);
           }
 
 
@@ -36,5 +38,9 @@ public class BlockchainTest {
         bc.addBlock(newBl);
 
         bc.displayAll();
+        System.out.println("Do u wanna exit: 0. Yes 1. No");
+        flag=sc.nextInt();
+        
+        }
     }
 }
