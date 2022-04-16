@@ -1,18 +1,34 @@
+import java.util.*;
+
 public class BlockchainTest {
     public static void main(String[] args) throws Exception {
         Chain bc = Chain.getChain(2, "00");
+        ArrayList<User> usersList = new ArrayList<>();
 
         MemPool mp = new MemPool(1);
 
-        User u1 = new User("hrishit", mp);
-        User u2 = new User("divya", mp);
-        User u3 = new User("ishita", mp);
-        User u4 = new User("doraemon", mp);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of users:");
+        int no_of_users = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Enter the users:");
+        for (int i = 0; i < no_of_users; i++) {
+            String user_name = sc.nextLine();
+            usersList.add(new User(user_name, mp));
+          }
+        
+        // System.out.println("Enter the no of transactions:");
+        // int no_of_trans = sc.nextInt();
+        // sc.nextLine(); 
+        System.out.println("Enter the corresponding transaction name, and transaction details in the nextline:");
+        for (int i = 0; i < no_of_users; i++) {
+            String transacName = sc.nextLine();
+            String transac= sc.nextLine();
+            usersList.get(i).setTransaction(transac, transacName);
 
-        u1.setTransaction("Paid Rs 100 to Divya");
-        u2.setTransaction("Paid Rs 200 to Ishita");
-        u3.setTransaction("Paid Rs 150 to Hrishit");
-        u4.setTransaction("I'm doraemon");
+            System.out.println(transacName);
+          }
+
 
         Miner man = new Miner();
         

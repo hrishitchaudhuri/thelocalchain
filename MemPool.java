@@ -16,6 +16,11 @@ public class MemPool {
 		byte[] verifyHash = TransactionHasher.hashTransaction(original);
 
 		if (Arrays.equals(hash, verifyHash)) {
+
+			//to add transaction name to db for retrieval later
+			String transacName = original.substring(0, original.indexOf("~"));
+			// System.out.println(transacName);
+
 			transactions.add(original);
 		}
 

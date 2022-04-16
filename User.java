@@ -35,8 +35,8 @@ public class User {
 		this.publicMemPool = mp;
 	}
 
-	public void setTransaction(String transaction) throws Exception {
-		String transactionString = userName + ">>" + transaction;
+	public void setTransaction(String transaction, String transacName) throws Exception {
+		String transactionString = transacName + "~" + userName + ">>" + transaction;
 		byte[] encryptedTransaction = TransactionEncrypter.encryptTransaction(transactionString, userPrivateKey);
 		byte[] hashedTransaction = TransactionHasher.hashTransaction(transactionString);
 

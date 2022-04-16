@@ -16,6 +16,9 @@ public class Chain {
 	public void addBlock(Block bl_) {
 		if (bl_.getHash().substring(0, prefix).equals(prefixString)) {
 			if (blockChain.chain.size() >= 1) {
+				
+				//verifychain()
+
 				String previous = blockChain.chain.get(blockChain.chain.size() - 1).getHash();
 				bl_.setPrev(previous);
 			}
