@@ -10,8 +10,8 @@ public class MemPool {
 		transactions = new ArrayList<String>();
 	}
 
-	public void addTransaction(byte[] trans, byte[] hash, PublicKey userPublicKey) throws Exception {
-		String original = TransactionDecrypter.decryptTransaction(trans, User.getUserPublicKey());
+	public void addTransaction(User u, byte[] trans, byte[] hash, PublicKey userPublicKey) throws Exception {
+		String original = TransactionDecrypter.decryptTransaction(trans, u.getUserPublicKey());
 
 		byte[] verifyHash = TransactionHasher.hashTransaction(original);
 

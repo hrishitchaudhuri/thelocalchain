@@ -30,7 +30,8 @@ public class BlockchainTest {
             String transacName = sc.nextLine();
             String transac= sc.nextLine();
             String usern= usersList.get(i).getUserName();
-            TransactionHelper.setTransaction(transac, transacName, usern);
+            User u = usersList.get(i);
+            TransactionHelper.setTransaction(u,transac, transacName, usern);
             // usersList.get(i).setTransaction(transac, transacName);
 
             //System.out.println("The username is -" +usersList.get(i).getUserName());

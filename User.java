@@ -19,7 +19,7 @@ public class User {
 		this.userPrivateKey = pair.getPrivate();
 	}
 
-	public String getUserPrivateKey() {
+	public PrivateKey getUserPrivateKey() {
 		return this.userPrivateKey;
 	}
 
