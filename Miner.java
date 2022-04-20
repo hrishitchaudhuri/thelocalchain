@@ -1,10 +1,23 @@
 import java.time.ZonedDateTime;
 
 public class Miner {
+	public int flag = 0;
+
 	public Block mineBlock(String prefixString, MemPool pool) throws Exception {
     	String transactionString = pool.getTransactions();
+		Block bl;
+		if(flag!=0)
+		{
+			System.out.print("Closed block created");
+			bl = new ClosedBlock(transactionString, ZonedDateTime.now().toInstant().toEpochMilli());
+		}
 
-		Block bl = new Block(transactionString, ZonedDateTime.now().toInstant().toEpochMilli());
+		else
+		{
+			System.out.print("Genesis block created");
+			bl = new GenesisBlock(transactionString, ZonedDateTime.now().toInstant().toEpochMilli());
+			flag = 1;
+		}
 
 		while (!bl.getHash().substring(0, prefixString.length()).equals(prefixString)) {
         	bl.setNonce(bl.getNonce() + 1);
