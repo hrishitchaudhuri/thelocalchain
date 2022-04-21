@@ -8,13 +8,13 @@ public class Miner {
 		Block bl;
 		if(flag!=0)
 		{
-			System.out.print("Closed block created");
+			System.out.println("Closed block created");
 			bl = new ClosedBlock(transactionString, ZonedDateTime.now().toInstant().toEpochMilli());
 		}
 
 		else
 		{
-			System.out.print("Genesis block created");
+			System.out.println("Genesis block created");
 			bl = new GenesisBlock(transactionString, ZonedDateTime.now().toInstant().toEpochMilli());
 			flag = 1;
 		}

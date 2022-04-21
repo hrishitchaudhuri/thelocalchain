@@ -18,8 +18,7 @@ public class GenesisBlock extends Block
     }
 
 	public String calculateBlockHash() throws Exception {
-		String hashableData = " "
-      		+ Long.toString(timeStamp) 
+		String hashableData = Long.toString(timeStamp) 
       		+ Integer.toString(nonce) 
       		+ data;
     
@@ -46,10 +45,10 @@ public class GenesisBlock extends Block
 	}
 
 	public String getPrev() {
-		return "";
+		return " ";
 	}
 
 	public void setPrev(String prev) {
-		this.prev = "";
+		this.prev = " ";
 	}
 }
