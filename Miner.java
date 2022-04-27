@@ -15,7 +15,7 @@ public class Miner {
 		else
 		{
 			bl = new GenesisBlock(transactionString, ZonedDateTime.now().toInstant().toEpochMilli());
-			System.out.println("Genesis block created");
+			// System.out.println("Genesis block created");
 			flag = 1;
 		}
 

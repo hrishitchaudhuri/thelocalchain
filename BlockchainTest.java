@@ -45,7 +45,7 @@ public class BlockchainTest {
         bc.addBlock(newBl);
 
         bc.displayAll();
-        System.out.println("Do u wanna exit: 0. Yes 1. No");
+        System.out.println("Do you want to exit?: 0 - Yes, 1 - No");
         flag=sc.nextInt();
         existing_users=total_users;
         }
