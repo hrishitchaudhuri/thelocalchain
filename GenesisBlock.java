@@ -10,7 +10,7 @@ public class GenesisBlock extends Block
 	private long timeStamp;
 	private int nonce;
 
-	public GenesisBlock(String data, long timeStamp)  
+	public GenesisBlock(String data, long timeStamp) throws Exception
     {
         this.data = data;
         this.timeStamp = timeStamp;
@@ -18,7 +18,8 @@ public class GenesisBlock extends Block
     }
 
 	public String calculateBlockHash() throws Exception {
-		String hashableData = Long.toString(timeStamp) 
+		String hashableData = " "
+			+ Long.toString(timeStamp) 
       		+ Integer.toString(nonce) 
       		+ data;
     
@@ -37,6 +38,7 @@ public class GenesisBlock extends Block
 	}
 
 	public String getHash() {
+		//System.out.println(nonce);
 		return hash;
 	}
 
@@ -51,4 +53,25 @@ public class GenesisBlock extends Block
 	public void setPrev(String prev) {
 		this.prev = " ";
 	}
+
+	public void display() {
+		System.out.println(data + " @ " + Long.toString(timeStamp) + " : " + hash);
+	}
+	
+	public String getData() {
+		return data;
+	}
+
+	public long getTimeStamp() {
+		return timeStamp;
+	}
+
+	public int getNonce() {
+		return nonce;
+	}
+
+	public void setNonce(int nonce) {
+		this.nonce = nonce;
+	}
+
 }

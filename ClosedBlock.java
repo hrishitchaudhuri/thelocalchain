@@ -52,4 +52,25 @@ public class ClosedBlock extends Block
 	public void setPrev(String prev) {
 		this.prev = prev;
 	}
+
+	public void display() {
+		System.out.println(data + "@" + Long.toString(timeStamp) + ":" + hash);
+	}
+	
+	public String getData() {
+		return data;
+	}
+
+	public long getTimeStamp() {
+		return timeStamp;
+	}
+
+	public int getNonce() {
+		return nonce;
+	}
+
+	public void setNonce(int nonce) {
+		this.nonce = nonce;
+	}
+
 }

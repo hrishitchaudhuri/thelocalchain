@@ -14,15 +14,17 @@ public class Miner {
 
 		else
 		{
-			System.out.println("Genesis block created");
 			bl = new GenesisBlock(transactionString, ZonedDateTime.now().toInstant().toEpochMilli());
+			System.out.println("Genesis block created");
 			flag = 1;
 		}
 
-		while (!bl.getHash().substring(0, prefixString.length()).equals(prefixString)) {
+		while (!(bl.getHash().substring(0, prefixString.length()).equals(prefixString))) {
         	bl.setNonce(bl.getNonce() + 1);
         	bl.resetHash();
+			//System.out.println("iteration");
     	}
+		//System.out.println("exited loop");
 
 		pool.clearTransactions();
 
