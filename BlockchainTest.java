@@ -13,7 +13,14 @@ public class BlockchainTest {
 
         while (flag!=0)
         {
-        Scanner sc = new Scanner(System.in);
+          Scanner sc = new Scanner(System.in);
+
+          if(flag == 2) {
+            System.out.println("Enter the transaction name to be retrieved: ");
+            String transName = sc.nextLine();
+            MemPool.retrieveTransaction(transName);
+          }
+
         System.out.println("Enter the number of users:");
         int new_users = sc.nextInt();
         sc.nextLine();
@@ -41,11 +48,11 @@ public class BlockchainTest {
 
         Miner man = new Miner();
         
-        Block newBl = man.mineBlock(bc.getPrefixString(), mp);
+        Block newBl = man.mineBlock(bc.getPrefixString(), mp, bc);
         bc.addBlock(newBl);
 
         bc.displayAll();
-        System.out.println("Do you want to exit?: 0 - Yes, 1 - No");
+        System.out.println("Do you want to exit?: 0 - Yes, 1 - No, 2 - Retrieve transaction");
         flag=sc.nextInt();
         existing_users=total_users;
         }

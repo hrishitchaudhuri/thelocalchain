@@ -5,7 +5,7 @@ public class Chain {
 	int prefix;
 	String prefixString;
 
-	static Chain blockChain;
+	public static Chain blockChain;
 
 	private Chain(int prefix, String prefixString) {
 		this.chain = new ArrayList<Block>();
@@ -18,11 +18,12 @@ public class Chain {
 
 	 	for (int i = blockChain.chain.size() - 1; i > 0; i--) 
 		{
-			// System.out.println("ok ok hopefully ");
+			System.out.println("Blockchain created successfully");
 	 		Block b = blockChain.chain.get(i);
 			Block prevblock = blockChain.chain.get(i-1);
 	 		if (prevblock.getHash().equals(b.getPrev())) {
-	 			System.out.println("ok for "+ i);
+				System.out.println(prevblock.getHash() + "matches" + b.getPrev());
+	 			// System.out.println("Block number: "+ i);
 	 		} else {
 	 			throw new RuntimeException("Chain Invalid");
 	 		}
@@ -32,7 +33,7 @@ public class Chain {
 	public void addBlock(Block bl_) {
 		if (bl_.getHash().substring(0, prefix).equals(prefixString)) {
 			if (blockChain.chain.size() >= 1) {
-				// System.out.println("ok adding more ");
+				System.out.println("Adding new block");
 				verifychain();
 
 				String previous = blockChain.chain.get(blockChain.chain.size() - 1).getHash();
@@ -50,7 +51,7 @@ public class Chain {
 		}
 
 		else {
-			System.out.println("[ERR] Block has illegal hash value.");
+			System.out.println("[ERR] Block has illegal hash value");
 		}
 	}
 
@@ -64,6 +65,11 @@ public class Chain {
 
 	static public Chain getChain() {
 		return blockChain;
+	}
+
+	static public int getSize() {
+		System.out.println(blockChain.chain.size());
+		return blockChain.chain.size();
 	}
 
 	public String getPrefixString() {

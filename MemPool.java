@@ -44,23 +44,16 @@ public class MemPool {
 
 	void writeToDB(String transaction) {
 		try {
-			//Class.forName("com.mysql.jdbc.Driver");
 			Class.forName("org.postgresql.Driver");
-			//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
 			Connection con = DriverManager .getConnection("jdbc:postgresql://localhost:5432/blockchain", "postgres", "12345678");
 			PreparedStatement stmt = con.prepareStatement("insert into blockchain values(?, ?, ?) ");
-			//PreparedStatement stmt = con.prepareStatement("insert into test values( \"A\" , \"B\" , \"C\" ) ");
-			//PreparedStatement stmt = con.prepareStatement("insert into test values( \"123\" ) ");
 			String[] parts = transaction.split("~");
 
-			
 			String transacName = parts[0];
 			String userName =  parts[1];
 			String transData =  parts[2];
 
-			System.out.println(transData);
-
-			
+			//System.out.println(transData);
 			stmt.setString(1, transacName);
 			stmt.setString(2, userName);
 			stmt.setString(3, transData); 
@@ -72,4 +65,32 @@ public class MemPool {
 			System.out.println("Database Error");
 		}
 	}
+
+	static private void displayDB(ResultSet rs) throws SQLException {
+        while (rs.next()) {
+            System.out.println(rs.getString("transaction_name") + "\t"
+                    + rs.getString("user_name") + "\t"
+                    + rs.getString("transaction_data"));
+
+        }
+    }
+
+	static void retrieveTransaction(String transName) {
+        String SQL = "SELECT \"transaction_name\", \"user_name\", \"transaction_data\""
+                + "FROM blockchain "
+                + "WHERE transaction_name = ?";
+
+        try {
+			Class.forName("org.postgresql.Driver");
+			Connection con = DriverManager .getConnection("jdbc:postgresql://localhost:5432/blockchain", "postgres", "12345678");
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1, transName);
+			ResultSet rs = pstmt.executeQuery();
+			displayDB(rs);
+		}
+    
+		catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }	
 }
